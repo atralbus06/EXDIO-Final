@@ -4,24 +4,27 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    int maxHealth;
-    int curHealth;
+    [SerializeField] int maxHealth;
+    [SerializeField] int curHealth;
 
-    SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
 
     void Awake()
     {
-        maxHealth = 100;
-        curHealth = maxHealth;
-        spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    //void OnEnable()
-    //{
-    //    curHealth = maxHealth;
-    //}
+    void Start()
+    {
+        maxHealth = 100;
+        curHealth = maxHealth;
+    }
+
+    void OnEnable()
+    {
+        maxHealth = 100;
+        curHealth = maxHealth;
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {

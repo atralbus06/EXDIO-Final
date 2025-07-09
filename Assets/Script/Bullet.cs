@@ -27,7 +27,8 @@ public class Bullet : MonoBehaviour
 
         if (objectData.objectType == ObjectData.ObjectType.PlayerBullet && collision.tag == "Enemy")
         {
-            GameManager.instance.enemy.Hit(objectData.damage);
+            GameObject enemy = collision.gameObject;
+            enemy.GetComponent<Enemy>().Hit(objectData.damage);
             gameObject.SetActive(false);
         }
     }
