@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    float speed;
+    [SerializeField] ObjectData objectData;
 
     Rigidbody2D rigid;
 
@@ -13,14 +13,9 @@ public class Bullet : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
-    {
-        speed = 7.5f;
-    }
-
     void FixedUpdate()
     {
-        rigid.velocity = new Vector2(0, speed);
+        rigid.velocity = new Vector2(0, objectData.speed);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -30,9 +25,9 @@ public class Bullet : MonoBehaviour
             gameObject.SetActive(false);
         }
 
-        if (collision.tag == "Enemy")
+        if (objectData.objectType == ObjectData.ObjectType.PlayerBullet && collision.tag == "Enemy")
         {
-            GameManager.instance.enemy.Hit();
+            GameManager.instance.enemy.Hit(objectData.damage);
             gameObject.SetActive(false);
         }
     }

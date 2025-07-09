@@ -4,14 +4,24 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    int maxHealth;
+    int curHealth;
+
     SpriteRenderer spriteRenderer;
     Rigidbody2D rigid;
 
     void Awake()
     {
+        maxHealth = 100;
+        curHealth = maxHealth;
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigid = GetComponent<Rigidbody2D>();
     }
+
+    //void OnEnable()
+    //{
+    //    curHealth = maxHealth;
+    //}
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -21,8 +31,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Hit()
+    public void Hit(int damage)
     {
-
+        curHealth -= damage;
+        Debug.Log("Hit! curHealth : " + curHealth);
     }
 }
