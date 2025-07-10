@@ -29,7 +29,23 @@ public class Bullet : MonoBehaviour
         {
             GameObject enemy = collision.gameObject;
             enemy.GetComponent<Enemy>().Hit(objectData.damage);
+            Effect(objectData.TypeNum);
             gameObject.SetActive(false);
+        }
+    }
+
+    void Effect(string typeNum)
+    {
+        switch (typeNum)
+        {
+            case "A":
+                GameObject effectA = GameManager.instance.objectManager.Get(3);
+                effectA.transform.position = transform.position + new Vector3(0, 0.2f, 0);
+                break;
+            case "B":
+                GameObject effectB = GameManager.instance.objectManager.Get(5);
+                effectB.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+                break;
         }
     }
 }

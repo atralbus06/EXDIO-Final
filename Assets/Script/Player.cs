@@ -64,8 +64,18 @@ public class Player : MonoBehaviour
         {
             bulletSpawnTime = 0.0f;
 
-            GameObject playerBulletA = GameManager.instance.objectManager.Get(1);
-            playerBulletA.transform.position = transform.position;
+            switch (GameManager.instance.curPlayerBulletType)
+            {
+                case "A":
+                    GameObject playerBulletA = GameManager.instance.objectManager.Get(1);
+                    playerBulletA.transform.position = transform.position;
+                    break;
+                case "B":
+                    GameObject playerBulletB = GameManager.instance.objectManager.Get(4);
+                    playerBulletB.transform.position = transform.position;
+                    break;
+                    
+            }
         }
     }
 

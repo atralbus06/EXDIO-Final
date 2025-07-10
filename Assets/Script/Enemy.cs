@@ -14,12 +14,6 @@ public class Enemy : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
     }
 
-    void Start()
-    {
-        maxHealth = 100;
-        curHealth = maxHealth;
-    }
-
     void OnEnable()
     {
         maxHealth = 100;
