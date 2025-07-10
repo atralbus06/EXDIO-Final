@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     //프리팹은 instance로 불러올 수 없음 할거면 소환하고 하이어라이키에 있는 오브젝트를 들고와야함
     public ObjectManager objectManager;
+    public Player player;
 
     public string[] playerBulletType;
     public string curPlayerBulletType;
@@ -20,6 +21,12 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
 
         curPlayerBulletType = "A";
+    }
+
+    void Start()
+    {
+        GameObject p = objectManager.Get(0);
+        player = p.GetComponent<Player>();
     }
 
     void Update()
@@ -47,6 +54,8 @@ public class GameManager : MonoBehaviour
                     curPlayerBulletType = playerBulletType[0];
                 else
                     curPlayerBulletType = playerBulletType[i + 1];
+
+                player.ChangeInterval(curPlayerBulletType);
                 break;
             }
         }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] int maxHealth;
-    [SerializeField] int curHealth;
+    [SerializeField] EnemyData enemyData;
+    int curHealth;
 
     Rigidbody2D rigid;
 
@@ -16,8 +16,21 @@ public class Enemy : MonoBehaviour
 
     void OnEnable()
     {
-        maxHealth = 100;
-        curHealth = maxHealth;
+        curHealth = enemyData.maxHealth;
+    }
+
+    void FixedUpdate()
+    {
+        switch (enemyData.moveStyle)
+        {
+            case EnemyData.MoveStyle.straight:
+                Straight();
+                break;
+            case EnemyData.MoveStyle.sin:
+                break;
+            case EnemyData.MoveStyle.tan:
+                break;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -28,9 +41,22 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void Straight()
+    {
+        if (enemyData.isReverse)
+            rigid.velocity = new Vector2(0, -enemyData.speed);
+        else
+            rigid.velocity = new Vector2(0, enemyData.speed);
+    }
+
     public void Hit(int damage)
     {
         curHealth -= damage;
         Debug.Log("Hit! curHealth : " + curHealth);
+
+        if (curHealth <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

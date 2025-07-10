@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         speed = 5;
-        bulletInterval = 1.0f;
+        bulletInterval = 0.5f;
         bulletSpawnTime = 0.0f;
 
         isTouchTop = false;
@@ -41,42 +41,6 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-    }
-
-    void Move()
-    {
-        float h = Input.GetAxisRaw("Horizontal");
-        if ((isTouchRight && h == 1) || (isTouchLeft && h == -1))
-            h = 0;
-
-        float v = Input.GetAxisRaw("Vertical");
-        if ((isTouchTop && v == 1) || (isTouchBottom && v == -1))
-            v = 0;
-
-        rigid.velocity = new Vector2(h, v).normalized * speed;
-    }
-
-    void Attack()
-    {
-        bulletSpawnTime += Time.deltaTime;
-
-        if (bulletSpawnTime >= bulletInterval)
-        {
-            bulletSpawnTime = 0.0f;
-
-            switch (GameManager.instance.curPlayerBulletType)
-            {
-                case "A":
-                    GameObject playerBulletA = GameManager.instance.objectManager.Get(1);
-                    playerBulletA.transform.position = transform.position;
-                    break;
-                case "B":
-                    GameObject playerBulletB = GameManager.instance.objectManager.Get(4);
-                    playerBulletB.transform.position = transform.position;
-                    break;
-                    
-            }
-        }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -120,6 +84,55 @@ public class Player : MonoBehaviour
                     isTouchLeft = false;
                     break;
             }
+        }
+    }
+
+    void Move()
+    {
+        float h = Input.GetAxisRaw("Horizontal");
+        if ((isTouchRight && h == 1) || (isTouchLeft && h == -1))
+            h = 0;
+
+        float v = Input.GetAxisRaw("Vertical");
+        if ((isTouchTop && v == 1) || (isTouchBottom && v == -1))
+            v = 0;
+
+        rigid.velocity = new Vector2(h, v).normalized * speed;
+    }
+
+    void Attack()
+    {
+        bulletSpawnTime += Time.deltaTime;
+
+        if (bulletSpawnTime >= bulletInterval)
+        {
+            bulletSpawnTime = 0.0f;
+
+            switch (GameManager.instance.curPlayerBulletType)
+            {
+                case "A":
+                    GameObject playerBulletA = GameManager.instance.objectManager.Get(1);
+                    playerBulletA.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+                    break;
+                case "B":
+                    GameObject playerBulletB = GameManager.instance.objectManager.Get(4);
+                    playerBulletB.transform.position = transform.position + new Vector3(0, 0.5f, 0);
+                    break;
+
+            }
+        }
+    }
+
+    public void ChangeInterval(string bulletType)
+    {
+        switch (bulletType)
+        {
+            case "A":
+                bulletInterval = 0.5f;
+                break;
+            case "B":
+                bulletInterval = 1.0f;
+                break;
         }
     }
 }
