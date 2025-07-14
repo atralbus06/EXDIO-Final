@@ -8,6 +8,7 @@ TagManager:
   - PlayerMoveArea
   - Enemy
   - PlayerBullet
+  - BulletDeadZone
   layers:
   - Default
   - TransparentFX

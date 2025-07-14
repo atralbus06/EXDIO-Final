@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] ObjectData objectData;
+    public ObjectData objectData;
 
     Rigidbody2D rigid;
 
@@ -15,12 +15,13 @@ public class Bullet : MonoBehaviour
 
     void FixedUpdate()
     {
-        rigid.velocity = new Vector2(0, objectData.speed);
+        if (objectData.objectType == ObjectData.ObjectType.PlayerBullet)
+            rigid.velocity = new Vector2(0, objectData.speed);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "DeadZone")
+        if (collision.tag == "BulletDeadZone")
         {
             gameObject.SetActive(false);
         }
