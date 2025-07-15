@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EnemyB
   m_EditorClassIdentifier: 
   moveStyle: 1
-  maxHealth: 40
-  speed: 5
-  bulletInterval: 0
-  isFire: 0
+  maxHealth: 300
+  speed: 3.5
+  bulletInterval: 0.5
+  score: 50
+  isFire: 1

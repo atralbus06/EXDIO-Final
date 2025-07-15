@@ -12,6 +12,7 @@ public class EnemyData : ScriptableObject
     public int maxHealth;
     public float speed;
     public float bulletInterval;
+    public int score;
 
     public bool isFire;
 }

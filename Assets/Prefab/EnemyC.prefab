@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6950509341771998513}
   - component: {fileID: 5608798325698751775}
-  - component: {fileID: 392720836241483575}
+  - component: {fileID: 579253962306235076}
   - component: {fileID: 7645851566549262772}
   - component: {fileID: 1849817888078965580}
   m_Layer: 0
@@ -87,8 +87,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &392720836241483575
-BoxCollider2D:
+--- !u!60 &579253962306235076
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -129,9 +129,19 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.33, y: 0.47}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.044999998, y: 0.235}
+      - {x: -0.095, y: 0.155}
+      - {x: -0.16499999, y: -0.055}
+      - {x: -0.16499999, y: -0.114999995}
+      - {x: -0.155, y: -0.155}
+      - {x: -0.095, y: -0.235}
+      - {x: 0.114999995, y: -0.235}
+      - {x: 0.16499999, y: -0.205}
+      - {x: 0.16499999, y: -0.015}
+      - {x: 0.055, y: 0.235}
+  m_UseDelaunayMesh: 0
 --- !u!50 &7645851566549262772
 Rigidbody2D:
   serializedVersion: 4

@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         speed = 5;
-        bulletInterval = 0.5f;
+        bulletInterval = 0.25f;
         bulletSpawnTime = 0.0f;
 
         isTouchTop = false;
@@ -62,6 +62,12 @@ public class Player : MonoBehaviour
                     isTouchLeft = true;
                     break;
             }
+        }
+
+        if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "EnemyBullet")
+        {
+            GameManager.instance.GameOver();
+            Time.timeScale = 0;
         }
     }
 

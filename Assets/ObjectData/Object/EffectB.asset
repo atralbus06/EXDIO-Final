@@ -15,4 +15,4 @@ MonoBehaviour:
   objectType: 2
   TypeNum: B
   speed: 0.6
-  damage: 10
+  damage: 200

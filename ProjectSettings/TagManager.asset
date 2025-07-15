@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - PlayerBullet
   - BulletDeadZone
+  - Undefined
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: EnemyA
   m_EditorClassIdentifier: 
   moveStyle: 0
-  maxHealth: 30
+  maxHealth: 200
   speed: 7.5
-  isReverse: 1
+  bulletInterval: 0
+  score: 15
   isFire: 0

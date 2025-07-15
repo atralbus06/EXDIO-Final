@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +14,15 @@ public class GameManager : MonoBehaviour
 
     public string[] playerBulletType;
     public string curPlayerBulletType;
+
+    int curScore;
+    int finalScore;
+    public float time;
+
+    public Text scoreText;
+    public Text timeText;
+    public GameObject gameoverUI;
+    public Text finalScoreText;
 
     void Awake()
     {
@@ -27,10 +38,17 @@ public class GameManager : MonoBehaviour
     {
         GameObject p = objectManager.Get(0);
         player = p.GetComponent<Player>();
+
+        curScore = 0;
+
+        gameoverUI.SetActive(false);
     }
 
     void Update()
     {
+        time += Time.deltaTime;
+        timeText.text = "Time: " + time.ToString("F2");
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             GameObject enemySemple = objectManager.Get(2);
@@ -59,5 +77,30 @@ public class GameManager : MonoBehaviour
                 break;
             }
         }
+    }
+
+    public void Score(int score)
+    {
+        curScore += score;
+        scoreText.text = "score: " + curScore;
+    }
+
+    public void GameOver()
+    {
+        finalScore = curScore + Mathf.FloorToInt(time);
+        gameoverUI.SetActive(true);
+        finalScoreText.text = "Score: " + finalScore;
+    }
+
+    public void Retry()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Main");
+    }
+
+    public void MainMeun()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Start");
     }
 }

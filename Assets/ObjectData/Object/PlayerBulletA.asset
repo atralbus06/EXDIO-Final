@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectType: 0
   TypeNum: A
-  speed: 7.5
-  damage: 10
+  speed: 10
+  damage: 100

@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         bulletSpawnTime += Time.deltaTime;
+
         if (enemyData.isFire && bulletSpawnTime >= enemyData.bulletInterval)
         {
             bulletSpawnTime = 0;
@@ -70,23 +71,11 @@ public class Enemy : MonoBehaviour
 
     void Fire()
     {
-        switch (enemyData.moveStyle)
-        {
-            case EnemyData.MoveStyle.horizontal:
-                GameObject bulletA1 = GameManager.instance.objectManager.Get(8);
-                Rigidbody2D rigidA1 = bulletA1.GetComponent<Rigidbody2D>();
-                bulletA1.transform.position = transform.position;
-                Vector2 directA1 = GameManager.instance.player.transform.position - transform.position;
-                rigidA1.velocity = directA1.normalized * bulletA1.GetComponent<Bullet>().objectData.speed;
-                break;
-            case EnemyData.MoveStyle.tracking:
-                GameObject bulletA2 = GameManager.instance.objectManager.Get(8);
-                Rigidbody2D rigidA2 = bulletA2.GetComponent<Rigidbody2D>();
-                bulletA2.transform.position = transform.position;
-                Vector2 directB = GameManager.instance.player.transform.position - transform.position;
-                rigidA2.velocity = directB.normalized * bulletA2.GetComponent<Bullet>().objectData.speed;
-                break;
-        }
+        GameObject bulletA = GameManager.instance.objectManager.Get(8);
+        Rigidbody2D rigidA = bulletA.GetComponent<Rigidbody2D>();
+        bulletA.transform.position = transform.position;
+        Vector2 directA = GameManager.instance.player.transform.position - transform.position;
+        rigidA.velocity = directA.normalized * bulletA.GetComponent<Bullet>().objectData.speed;
     }
 
     void StraightMove()
@@ -119,10 +108,10 @@ public class Enemy : MonoBehaviour
     public void Hit(int damage)
     {
         curHealth -= damage;
-        Debug.Log("Hit! curHealth : " + curHealth);
 
         if (curHealth <= 0)
         {
+            GameManager.instance.Score(enemyData.score);
             gameObject.SetActive(false);
         }
     }

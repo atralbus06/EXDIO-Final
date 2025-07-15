@@ -12,23 +12,55 @@ public class SpawnManager : MonoBehaviour
     float spawnTime = 1.0f;
     float spawnInterval = 0.0f;
 
+    float spawnTimeSub;
+    float difficult;
+    int spawnNum;
+
+    void Start()
+    {
+        spawnTime = 0.0f;
+        spawnInterval = 1.5f;
+        difficult = 20.0f;
+    }
+
     void Update()
     {
-        spawnInterval += Time.deltaTime;
+        spawnTime += Time.deltaTime;
+        spawnTimeSub += Time.deltaTime;
+        spawnNum = 0;
 
-        if (spawnInterval >= spawnTime)
+        if (GameManager.instance.time >= difficult && spawnInterval > 0.75f)
         {
-            spawnInterval = 0.0f;
+            difficult = difficult + 20.0f;
+            spawnInterval = spawnInterval - 0.25f;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-            StraightSpawn();
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-            SinSpawn();
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-            HorizontalSpawn();
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-            TrackingSpawn();
+        if (spawnTime >= spawnInterval)
+        {
+            spawnTime = 0;
+            spawnNum = Random.Range(0, 10);
+            switch (spawnNum)
+            {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                    StraightSpawn();
+                    break;
+                case 4:
+                case 5:
+                case 6:
+                    HorizontalSpawn();
+                    break;
+                case 7:
+                case 8:
+                    SinSpawn();
+                    break;
+                case 9:
+                    TrackingSpawn();
+                    break;
+            }
+        }
     }
 
     void StraightSpawn()
